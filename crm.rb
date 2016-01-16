@@ -1,6 +1,5 @@
 require_relative 'contact.rb'
 
-
 class CRM
   def print_main_menu
     puts "1. Add a contact"
@@ -56,8 +55,6 @@ class CRM
       else
         puts "\"Yes\" was not selected.. Main menu "
       end
-
-
   end
 
   def choose_option(choice)
@@ -98,7 +95,6 @@ class CRM
     puts "Full Name:#{contact.full_name}, Email:(#{contact.email.capitalize}), Note:(#{contact.note.capitalize})"
   end
 
-
   def display_all_contacts
     Contact.all.each do |contact|
       puts "#{contact.id} Full Name:#{contact.full_name} ,Email:(#{contact.email}), Note:(#{contact.note})"
@@ -132,7 +128,6 @@ class CRM
         else
           puts "error"
       end
-
   end
 
  def delete_contact
@@ -146,7 +141,6 @@ class CRM
         puts"Contact deleted, Main Menu.."
     else
       puts "\"Yes\" was not selected, aborting... main menu.."
-      main_menu
     end
  end
  end
