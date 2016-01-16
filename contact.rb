@@ -26,10 +26,10 @@ class Contact
   def self.find(id)
     @@contacts.find { |contact| contact.id == id }
   end
-  
+
 
   def full_name
-    "#{first_name} #{last_name}"
+    "#{first_name.capitalize} #{last_name.capitalize}"
   end
 
 end
