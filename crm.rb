@@ -32,16 +32,20 @@ class CRM
     case choice
     when 1
       puts "Please enter new First name "
-       contact.first_name = gets.chomp
+       contact.first_name = gets.chomp.to_s
+       puts"First name has been changed to #{contact.first_name.capitalize}"
     when 2
       puts "Please enter new Last name"
-      contact.last_name = gets.chomp
+      contact.last_name = gets.chomp.to_s
+        puts"Last name has been changed to #{contact.last_name.capitalize}"
     when 3
       puts "Please enter new email"
-      contact.email= gets.chomp
+      contact.email= gets.chomp.to_s
+        puts"Email has been changed to #{contact.email.capitalize}"
     when 4
       puts "Please enter new note "
-      contact.note = gets.chomp
+      contact.note = gets.chomp.to_s
+      puts"Email has been changed to #{contact.note.capitalize}"
     end
   end
 
@@ -58,7 +62,7 @@ class CRM
       puts "Thanks for playing!"
       exit
     else
-      puts "I'm sorry Dave, I'm afraid you can't do that."
+      puts "I'm sorry, I'm afraid you can't do that."
     end
   end
 
@@ -73,10 +77,12 @@ class CRM
     puts "Note"
     note = gets.chomp.to_s
     new_contact = Contact.create(first_name, last_name, email: email, note: note)
+    puts "Contact has been added successfully."
   end
 
   def display_contact
     puts "Which Contact would you like to display please enter by id "
+    display_all_contacts
     user_id = gets.chomp.to_i
     contact = Contact.find(user_id)
     puts "#{contact.full_name.capitalize} (#{contact.email.capitalize}) (#{contact.note.capitalize})"
@@ -115,8 +121,8 @@ class CRM
  def delete_contact
    puts "Which contact would you like to delete enter by id"
    delete_contact = gets.chomp.to_i
-   puts "Are you sure?"
-   confirmation = gets.chomp
+   puts "Are you sure? Please enter yes or no"
+   confirmation = gets.chomp.downcase
     if confirmation == "yes"
         Contact.all.each do |user_id|
             if delete_contact == user_id.id
@@ -125,7 +131,9 @@ class CRM
               "error"
             end
         end
+        puts"Contact deleted, main menu.."
     else
+      puts "\"Yes\" was not selected, aborting... main menu.."
       main_menu
     end
  end
