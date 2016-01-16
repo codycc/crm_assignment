@@ -24,6 +24,7 @@ class CRM
 
   def modify_existing_contact
     puts "Which contact would you like to modify? Please enter their id"
+    display_all_contacts
     user_id = gets.chomp.to_i
     contact = Contact.find(user_id)
     puts contact
