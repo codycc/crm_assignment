@@ -1,8 +1,6 @@
 require_relative 'contact.rb'
 
 
-
-
 class CRM
   def print_main_menu
     puts "1. Add a contact"
@@ -15,9 +13,6 @@ class CRM
   end
 
 
-
-
-
   def main_menu
     choice = 0
     while true
@@ -26,9 +21,6 @@ class CRM
       choose_option(choice)
     end
   end
-
-
-
 
   def modify_existing_contact
     puts "Which contact would you like to modify? Please enter their id"
@@ -54,8 +46,6 @@ class CRM
   end
 
 
-
-
   def choose_option(choice)
     case choice
     when 1 then add_contact
@@ -72,8 +62,6 @@ class CRM
     end
   end
 
-
-
   def add_contact
     puts "Please provide the contact's info:"
     puts "First Name"
@@ -87,29 +75,12 @@ class CRM
     new_contact = Contact.create(first_name, last_name, email: email, note: note)
   end
 
-
-
-
-
   def display_contact
     puts "Which Contact would you like to display please enter by id "
     user_id = gets.chomp.to_i
     contact = Contact.find(user_id)
-    puts "#{contact.full_name} (#{contact.email}) (#{contact.note})" 
+    puts "#{contact.full_name.capitalize} (#{contact.email.capitalize}) (#{contact.note.capitalize})"
   end
-
-
-  # def display_contact
-  #   puts "Which Contact would you like to display please enter by id "
-  #   user_id = gets.chomp.to_i
-  #   if user_id == Contact.id
-  #     puts "#{contact.full_name}"
-  #   else
-  #     puts"error"
-  #   end
-  # end
-
-
 
 
   def display_all_contacts
@@ -118,8 +89,47 @@ class CRM
     end
   end
 
+  def display_contact_attribute
+    puts "What contact would you like to display an attribute for? Please enter by id "
+    user_id = gets.chomp.to_i
+    contact = Contact.find(user_id)
+      puts "Contact found, which attribute would you like to display?"
+      puts "First name[1]"
+      puts "Last name[2]"
+      puts "Full name[3]"
+      puts "Email[4]"
+      puts "Their note[5]"
+    attribute_id = gets.chomp.to_i
+      case attribute_id
+        when 1 then puts "The selected contacts first name is #{contact.first_name.capitalize}"
+        when 2 then puts "The selected contacts last name is #{contact.last_name.capitalize}"
+        when 3 then puts "The selected contacts full name is #{contact.full_name.capitalize}"
+        when 4 then puts "The selected contacts email address is #{contact.email.capitalize}"
+        when 5 then puts "The selected contacts note is #{contact.note}"
+        else
+          puts "error"
+      end
 
-end
+  end
+
+ def delete_contact
+   puts "Which contact would you like to delete enter by id"
+   delete_contact = gets.chomp.to_i
+   puts "Are you sure?"
+   confirmation = gets.chomp
+    if confirmation == "yes"
+        Contact.all.each do |user_id|
+            if delete_contact == user_id.id
+                Contact.all.delete(user_id)
+            else
+              "error"
+            end
+        end
+    else
+      main_menu
+    end
+ end
+ end
 
 crm = CRM.new
 crm.main_menu

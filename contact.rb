@@ -1,7 +1,6 @@
 class Contact
   attr_accessor :first_name, :last_name, :email, :note
   attr_reader :id
-
   @@contacts = []
   @@id = 1
 
@@ -37,10 +36,10 @@ class Contact
   end
 
 
-
   def full_name
     "#{first_name} #{last_name}"
   end
+
 
   # def first_name
   #   @first_name
