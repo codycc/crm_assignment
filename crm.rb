@@ -12,7 +12,6 @@ class CRM
     puts "7. Exit"
   end
 
-
   def main_menu
     choice = 0
     while true
@@ -60,7 +59,6 @@ class CRM
 
 
   end
-
 
   def choose_option(choice)
     case choice
@@ -128,7 +126,7 @@ class CRM
       case attribute_id
         when 1 then puts "The selected contacts first name is: #{contact.first_name.capitalize}"
         when 2 then puts "The selected contacts last name is: #{contact.last_name.capitalize}"
-        when 3 then puts "The selected contacts full name is: #{contact.full_name.capitalize}"
+        when 3 then puts "The selected contacts full name is: #{contact.full_name}"
         when 4 then puts "The selected contacts email address is: #{contact.email.capitalize}"
         when 5 then puts "The selected contacts note is: #{contact.note}"
         else
@@ -140,17 +138,11 @@ class CRM
  def delete_contact
    puts "Which contact would you like to delete? Please enter by ID."
    contacts_full_name_for_choices
-   delete_contact = gets.chomp.to_i
+   user_id = gets.chomp.to_i
    puts "Are you sure you'd like to delete this contact? Please enter yes or no"
    confirmation = gets.chomp.downcase
     if confirmation == "yes"
-        Contact.all.each do |user_id|
-            if delete_contact == user_id.id
-                Contact.all.delete(user_id)
-            else
-              "error"
-            end
-        end
+          Contact.delete(user_id)
         puts"Contact deleted, Main Menu.."
     else
       puts "\"Yes\" was not selected, aborting... main menu.."

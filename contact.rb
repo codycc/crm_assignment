@@ -23,6 +23,10 @@ class Contact
     @@contacts
   end
 
+  def self.delete(user_id)
+  @@contacts.delete_if { |contact| contact.id == user_id}
+  end
+
   def self.find(id)
     @@contacts.find { |contact| contact.id == id }
   end
