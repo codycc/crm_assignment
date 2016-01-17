@@ -1,4 +1,4 @@
-require_relative 'contact.rb'
+require_relative 'contact2.rb'
 
 class CRM
   def print_main_menu
@@ -6,9 +6,10 @@ class CRM
     puts "2. Modify a contact"
     puts "3. Display all contacts"
     puts "4. Display contact"
-    puts "5. Display contact attribute"
-    puts "6. Delete a contact"
-    puts "7. Exit"
+    puts "5. Search By Attribute"
+    puts "6. Display contact Attribute"
+    puts "7. Delete a contact"
+    puts "8. Exit"
   end
 
   def main_menu
@@ -25,6 +26,10 @@ class CRM
     puts "Lastname[2]"
     puts "Email[3]"
     puts "Note[4]"
+  end
+
+  def full_info
+        puts "#{contact.id} Full Name:#{contact.full_name} ,Email:(#{contact.email}), Note:(#{contact.note})"
   end
 
   def modify_existing_contact
@@ -67,9 +72,10 @@ class CRM
     when 2 then modify_existing_contact
     when 3 then display_all_contacts
     when 4 then display_contact
-    when 5 then display_contact_attribute
-    when 6 then delete_contact
-    when 7
+    when 5 then search_by_attribute
+    when 6 then display_contact_attribute
+    when 7 then delete_contact
+    when 8
       puts "Thanks for using this program!"
       exit
     else
@@ -80,13 +86,13 @@ class CRM
   def add_contact
     puts "Please provide the contact's info:"
     puts "First Name"
-    first_name = gets.chomp.to_s
+    first_name = gets.chomp.to_s.downcase
     puts "Last Name"
-    last_name = gets.chomp.to_s
+    last_name = gets.chomp.to_s.downcase
     puts "Email"
-    email = gets.chomp.to_s
+    email = gets.chomp.to_s.downcase
     puts "Note"
-    note = gets.chomp.to_s
+    note = gets.chomp.to_s.downcase
     new_contact = Contact.create(first_name, last_name, email: email, note: note)
     puts "Contact has been added successfully."
   end
@@ -96,7 +102,7 @@ class CRM
     contacts_full_name_for_choices
     user_id = gets.chomp.to_i
     contact = Contact.find(user_id)
-    puts "#{contact.id} Full Name:#{contact.full_name}, Email:(#{contact.email.capitalize}), Note:(#{contact.note.capitalize})"
+    puts "Full Name:#{contact.full_name}, Email:(#{contact.email.capitalize}), Note:(#{contact.note.capitalize})"
   end
 
   def display_all_contacts
@@ -110,6 +116,7 @@ class CRM
       puts "#{contact.id} #{contact.full_name}"
     end
   end
+
 
   def display_contact_attribute
     puts "What contact would you like to display an attribute for? Please enter by ID. "
@@ -128,6 +135,33 @@ class CRM
           puts "error"
       end
   end
+
+  def search_by_attribute
+  puts "Would you like to search by [1]Firstname, [2]Lastname, or [3]Both?"
+  answer = gets.chomp.to_i
+  case answer
+  when 1
+      puts "Please enter first name of person"
+      first_name = gets.chomp.to_s.downcase
+      contact = Contact.get_by_firstname(first_name)
+      puts "#{contact.id} Full Name:#{contact.first_name} #{contact.last_name} ,Email:(#{contact.email}), Note:(#{contact.note})"
+    when 2
+      puts "Please enter last name of person"
+      last_name = gets.chomp.to_s.downcase
+      contact = Contact.get_by_lastname(last_name)
+      puts "#{contact.id} Full Name:#{contact.first_name} #{contact.last_name} ,Email:(#{contact.email}), Note:(#{contact.note})"
+    when 3
+      puts "Please enter first name of person"
+      first_name = gets.chomp.to_s.downcase
+      puts "Please enter last name of person"
+      last_name = gets.chomp.to_s.downcase
+      contact = Contact.get_by_full_name(first_name,last_name)
+      puts "#{contact.id} Full Name:#{contact.first_name} #{contact.last_name} ,Email:(#{contact.email}), Note:(#{contact.note})"
+    else
+      puts "Please enter 1 2 or 3"
+    end
+  end
+
 
  def delete_contact
    puts "Which contact would you like to delete? Please enter by ID."

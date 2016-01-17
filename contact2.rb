@@ -1,3 +1,4 @@
+
 class Contact
   attr_accessor :first_name, :last_name, :email, :note
   attr_reader :id
@@ -19,6 +20,18 @@ class Contact
     new_contact
   end
 
+ def self.get_by_firstname(first_name)
+    @@contacts.find { |contact| contact.first_name == first_name }
+ end
+
+ def self.get_by_lastname(last_name)
+   @@contacts.find { |contact| contact.last_name == last_name}
+ end
+
+ def self.get_by_full_name(first_name,last_name)
+   @@contacts.find { |contact| (contact.first_name == first_name) && (contact.last_name == last_name)}
+ end
+
   def self.all
     @@contacts
   end
@@ -30,7 +43,6 @@ class Contact
   def self.find(id)
     @@contacts.find { |contact| contact.id == id }
   end
-
 
   def full_name
     "#{first_name.capitalize} #{last_name.capitalize}"
