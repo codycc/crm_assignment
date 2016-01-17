@@ -32,6 +32,14 @@ class Contact
    @@contacts.find { |contact| (contact.first_name == first_name) && (contact.last_name == last_name)}
  end
 
+ def self.get_by_email(email)
+   @@contacts.find { |contact| contact.email == email}
+ end
+
+ def self.get_by_note(note)
+   @@contacts.find { |contact| contact.note == note }
+ end
+
   def self.all
     @@contacts
   end
