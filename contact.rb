@@ -31,7 +31,6 @@ class Contact
     @@contacts.find { |contact| contact.id == id }
   end
 
-
   def full_name
     "#{first_name.capitalize} #{last_name.capitalize}"
   end

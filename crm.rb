@@ -20,6 +20,13 @@ class CRM
     end
   end
 
+  def attributes_menu
+    puts "Firstname[1],"
+    puts "Lastname[2]"
+    puts "Email[3]"
+    puts "Note[4]"
+  end
+
   def modify_existing_contact
     puts "Which contact would you like to modify? Please enter their ID."
     contacts_full_name_for_choices
@@ -29,10 +36,7 @@ class CRM
     answer = gets.chomp.downcase
       if answer == "yes"
       puts "Would you like to change their;"
-      puts "Firstname[1],"
-      puts "Lastname[2]"
-      puts "Email[3]"
-      puts "Note[4]"
+      attributes_menu
       choice = gets.chomp.to_i
         case choice
         when 1
@@ -113,18 +117,13 @@ class CRM
     user_id = gets.chomp.to_i
     contact = Contact.find(user_id)
       puts "Contact found, which attribute would you like to display?"
-      puts "First name[1]"
-      puts "Last name[2]"
-      puts "Full name[3]"
-      puts "Email[4]"
-      puts "Their note[5]"
+      attributes_menu
     attribute_id = gets.chomp.to_i
       case attribute_id
         when 1 then puts "The selected contacts first name is: #{contact.first_name.capitalize}"
         when 2 then puts "The selected contacts last name is: #{contact.last_name.capitalize}"
-        when 3 then puts "The selected contacts full name is: #{contact.full_name}"
-        when 4 then puts "The selected contacts email address is: #{contact.email.capitalize}"
-        when 5 then puts "The selected contacts note is: #{contact.note}"
+        when 3 then puts "The selected contacts email address is: #{contact.email.capitalize}"
+        when 4 then puts "The selected contacts note is: #{contact.note}"
         else
           puts "error"
       end
