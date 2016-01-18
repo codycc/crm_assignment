@@ -24,21 +24,29 @@ class Contact
     @@contacts.find { |contact| contact.first_name == first_name }
  end
 
- def self.get_by_lastname(last_name)
-   @@contacts.find { |contact| contact.last_name == last_name}
- end
+ # def self.get_by_lastname(last_name)
+ #   @@contacts.find { |contact| contact.last_name == last_name}
+ # end
+ #
+ # def self.get_by_full_name(first_name,last_name)
+ #   @@contacts.find { |contact| (contact.first_name == first_name) && (contact.last_name == last_name)}
+ # end
+ #
+ # def self.get_by_email(email)
+ #   @@contacts.find { |contact| contact.email == email}
+ # end
+ #
+ # def self.get_by_note(note)
+ #   @@contacts.find { |contact| contact.note == note }
+ # end
 
- def self.get_by_full_name(first_name,last_name)
-   @@contacts.find { |contact| (contact.first_name == first_name) && (contact.last_name == last_name)}
- end
-
- def self.get_by_email(email)
-   @@contacts.find { |contact| contact.email == email}
- end
-
- def self.get_by_note(note)
-   @@contacts.find { |contact| contact.note == note }
- end
+ def self.search_by_attribute(value)
+  @@contacts.each do |contact|
+    if contact.first_name == value || contact.last_name == value || contact.email == value || contact.note == value
+      print "#{contact.id}:#{contact.full_name} #{contact.note} #{contact.email}" 
+    end
+  end
+end
 
   def self.all
     @@contacts

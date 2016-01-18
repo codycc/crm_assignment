@@ -136,42 +136,47 @@ class CRM
       end
   end
 
-  def search_by_attribute
-  puts "Would you like to search by [1]Firstname, [2]Lastname, [3]Full name, [4]Email or [5]note?"
-  answer = gets.chomp.to_i
-  case answer
-  when 1
-      puts "Please enter first name of person"
-      first_name = gets.chomp.to_s.downcase
-      contact = Contact.get_by_firstname(first_name)
-      puts "#{contact.id} Full Name:#{contact.full_name} ,Email:(#{contact.email}), Note:(#{contact.note})"
-    when 2
-      puts "Please enter last name of person"
-      last_name = gets.chomp.to_s.downcase
-      contact = Contact.get_by_lastname(last_name)
-      puts "#{contact.id} Full Name:#{contact.full_name} ,Email:(#{contact.email}), Note:(#{contact.note})"
-    when 3
-      puts "Please enter first name of person"
-      first_name = gets.chomp.to_s.downcase
-      puts "Please enter last name of person"
-      last_name = gets.chomp.to_s.downcase
-      contact = Contact.get_by_full_name(first_name,last_name)
-        puts "#{contact.id} Full Name:#{contact.full_name} ,Email:(#{contact.email}), Note:(#{contact.note})"
-    when 4
-      puts "Please enter the email of desired person"
-      email = gets.chomp.downcase
-      contact = Contact.get_by_email(email)
-        puts "#{contact.id} Full Name:#{contact.full_name} ,Email:(#{contact.email}), Note:(#{contact.note})"
-    when 5
-      puts "Please enter the note of desired person"
-      note = gets.chomp.downcase
-      contact = Contact.get_by_note(note)
-        puts "#{contact.id} Full Name:#{contact.full_name} ,Email:(#{contact.email}), Note:(#{contact.note})"
+  def search_by_attribute 
+  puts "Please enter a search request: "
+  attribute_selection = gets.chomp.to_s
+  Contact.search_by_attribute(attribute_selection)
+end
 
-    else
-      puts "Please enter 1 2 or 3"
-    end
-  end
+  # def search_by_attribute
+  # puts "Would you like to search by [1]Firstname, [2]Lastname, [3]Full name, [4]Email or [5]note?"
+  # answer = gets.chomp.to_i
+  # case answer
+  # when 1
+  #     puts "Please enter first name of person"
+  #     first_name = gets.chomp.to_s.downcase
+  #     contact = Contact.get_by_firstname(first_name)
+  #     puts "#{contact.id} Full Name:#{contact.full_name} ,Email:(#{contact.email}), Note:(#{contact.note})"
+  #   when 2
+  #     puts "Please enter last name of person"
+  #     last_name = gets.chomp.to_s.downcase
+  #     contact = Contact.get_by_lastname(last_name)
+  #     puts "#{contact.id} Full Name:#{contact.full_name} ,Email:(#{contact.email}), Note:(#{contact.note})"
+  #   when 3
+  #     puts "Please enter first name of person"
+  #     first_name = gets.chomp.to_s.downcase
+  #     puts "Please enter last name of person"
+  #     last_name = gets.chomp.to_s.downcase
+  #     contact = Contact.get_by_full_name(first_name,last_name)
+  #       puts "#{contact.id} Full Name:#{contact.full_name} ,Email:(#{contact.email}), Note:(#{contact.note})"
+  #   when 4
+  #     puts "Please enter the email of desired person"
+  #     email = gets.chomp.downcase
+  #     contact = Contact.get_by_email(email)
+  #       puts "#{contact.id} Full Name:#{contact.full_name} ,Email:(#{contact.email}), Note:(#{contact.note})"
+  #   when 5
+  #     puts "Please enter the note of desired person"
+  #     note = gets.chomp.downcase
+  #     contact = Contact.get_by_note(note)
+  #       puts "#{contact.id} Full Name:#{contact.full_name} ,Email:(#{contact.email}), Note:(#{contact.note})"
+  #   else
+  #     puts "Please enter 1 2 or 3"
+  #   end
+  # end
 
 
  def delete_contact
