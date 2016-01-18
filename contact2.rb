@@ -43,7 +43,7 @@ class Contact
  def self.search_by_attribute(value)
   @@contacts.each do |contact|
     if contact.first_name == value || contact.last_name == value || contact.email == value || contact.note == value
-      print "#{contact.id}:#{contact.full_name} #{contact.note} #{contact.email}" 
+      puts "#{contact.id} #{contact.full_name} #{contact.note} #{contact.email}" 
     end
   end
 end
